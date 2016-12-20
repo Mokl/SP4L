@@ -140,7 +140,7 @@ void b()
 			start_time =n->ut_tv.tv_sec;
 			y2k=localtime(&start_time);
 			strftime(date, 20, "%F %R", y2k);
-			printf("démarraghe système ");
+			printf("    démarrage système ");
 			printf("%s\n",date);
         }
         n=getutent();
