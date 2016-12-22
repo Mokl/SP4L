@@ -9,7 +9,6 @@
 
 #define HOUR 3600
 #define MIN 60
-#define LOAD_INT(x) ((x) >> FSHIFT)
 
 void base();
 int nb_user();
@@ -79,7 +78,7 @@ void base()
 	mktime(y2k);
 	printf(" %.2d:%.2d:%.2d ", y2k->tm_hour , y2k->tm_min, y2k->tm_sec);
 
-	
+	// up time
 	sysinfo(&info);
 	time_s =info.uptime;	
 	h = time_s/HOUR;
@@ -88,14 +87,16 @@ void base()
 	s %= MIN;
 	printf(" up %.2d:%.2d:%.2d, ", h ,m,s);
 	
+	//number of user
 	printf("%d user, ",nb_user());
 	
+	// load average
 	if (getloadavg(load, 3) != -1)    
 	{     
  		printf("load average : %.2f , %.2f , %.2f\n", load[0],load[1],load[2]);  
   	}	
 }
-
+//p option
 void p()
 {
 	struct sysinfo info;
@@ -111,6 +112,7 @@ void p()
 	printf("up %d hours, %d minutes and %d secondes\n", h,m,s);
 }
 
+// s option
 void s()
 {
 	struct sysinfo info;
@@ -121,7 +123,7 @@ void s()
 	
 	sysinfo(&info);
 	
-	//current time
+	
 	curr_time = time(NULL);
 	
 	start_time = curr_time - info.uptime;
@@ -150,7 +152,6 @@ int nb_user()
         }
         n=getutent();
     }
-	//printf("nombre d'utilisateurs : %d\n",user_cmp);
 	endutent();
 	
 	return user_cmp;

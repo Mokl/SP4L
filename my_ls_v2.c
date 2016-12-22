@@ -5,11 +5,15 @@
 #include <unistd.h>
 #include <getopt.h>
 
+
+/*
+	this structure will contain the information retrieved from different directories.
+*/
 typedef struct{
 	 char name[1000][256];
-	 int  index;
-	 char opt[2];
-	 int set;
+	 int  index;// number of element contained by the name array.
+	 char opt[2];// option selected  (l,R,a).
+	 int set;// set > 0, the struct is set and contains data
  }Data;
 
 
@@ -59,6 +63,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	
+	//default path
 	if (argc - optind == 0)
 	{       
          strcpy(route,".");
@@ -67,7 +72,6 @@ int main(int argc, char *argv[])
 	else
 	{
 		int i ;
-		
 	
 		for( i = optind; i < argc; i++)
 		{
@@ -75,6 +79,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	
+	//selection of the operation
 	if( aflag == 0 && lflag == 0 && Rflag == 0)
 	{
 		data = base(route,"");
@@ -118,11 +123,14 @@ int main(int argc, char *argv[])
 	}	
 }
 
+
+/*
+	this function will display the data
+*/
 void display(Data info)
 {
 	
 	int j;
-	//printf("%d\n", info.set);
 	if(info.set != 0)
 	{
 		if(info.opt[0] == 'l')
@@ -154,10 +162,10 @@ void display(Data info)
 	else
 	{
 		printf("no file or directory\n");
-	}
-	
+	}	
 }
 
+/* default command with or without the -l option*/
 Data base(char route[256], char opt[])
 {
 
@@ -198,7 +206,7 @@ Data base(char route[256], char opt[])
 	closedir(dirp);	
 	return info;
 }
-
+/*a option*/
 Data a(char route[], char opt[])
 {
 	struct dirent *dp;
@@ -234,6 +242,7 @@ Data a(char route[], char opt[])
 	return info;
 }
 
+/* R option*/
 Data R(char route[], char opt[])
 {
 	struct dirent *dp;

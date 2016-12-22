@@ -287,7 +287,6 @@ bool i(char source_file[20], char dest_file[20])
 	source = fopen(source_file,"r");
 	if(source == NULL)
 	{
-		
 		return false;
 	}
 	
