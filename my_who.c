@@ -144,7 +144,9 @@ void b()
 			y2k=localtime(&start_time);
 			strftime(date, 20, "%F %R", y2k);
 			
-			printf("démarrage du système ");
+			printf("   démarrage du système ");
+
+
 			printf("%s\n",date);
         }
         n=getutent();
