@@ -94,6 +94,9 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
+/*
+	basic rm command
+*/
 int base(char file[])
 {
 	FILE *fd ;
@@ -104,15 +107,13 @@ int base(char file[])
 		int ret;
 		fclose(fd);
 		ret = unlink(file);	
-		//fclose(fd);
-		//printf("file exist\n");
 		if(ret == -1)
 		{
 			DIR *dirp = opendir(file);
 			if(dirp != NULL)
 			{
 				closedir(dirp);
-				printf("it's a directory,it can't be deleted with this command, use rmdir.\n");
+				printf("c'est un repertoire, veuillez utiliser la command rmdir.\n");
 				return -1;
 			}
 		}
@@ -120,34 +121,38 @@ int base(char file[])
 	}
 	else
 	{		
-		printf("file doesn't exist or it's used u-in a other process\n");
+		printf("le fichier n'existe pas ou est utilisé dans un autre processus\n");
 		return -1;		
 	}
 }
 
+/*
+	recursive option
+*/
 int R(char file[20])
 {
-	printf("R -->%s\n",file);
 	struct dirent *dp;
 	DIR *dirp = opendir(file);
 	
-	if(dirp != NULL)
+	if(dirp != NULL)//checking if it's a directory
 	{
 		while(dirp)
 		{
+			//deleting file and sub-directory
 			if((dp = readdir(dirp)) != NULL)
 			{
 				//record of names
 				if(dp->d_name[0]!= '.')
 				{
-					if(dp->d_type == DT_DIR)
+					if(dp->d_type == DT_DIR)// checking if it's a directory
 					{
 						char route[50]={0};
+						//creating path
 						strcat(route,file);
 						strcat(route,"/");
 						strcat(route,dp->d_name);
-						printf("%s\n",dp->d_name);
-						if(R(route) < 0)
+						
+						if(R(route) < 0)// recursive call
 						{
 							return -1;
 						}
@@ -158,7 +163,7 @@ int R(char file[20])
 						strcat(route,file);
 						strcat(route,"/");
 						strcat(route,dp->d_name);
-						printf("else while\n");
+						
 						if(base(route) < 0)
 						{
 							return -1;
@@ -168,21 +173,17 @@ int R(char file[20])
 			}
 			else
 			{
-				/*if(rmdir(dp->d_name) > 0)
-				{
-					return -1;
-				}*/
 				break;
 			}
 		}
 		closedir(dirp);
-		return rmdir(file);
+		return rmdir(file);//deleting the directory
 	}
 	else
 	{
 		int ret ;
 		closedir(dirp);
-		printf("else\n");
+		
 		if(base(file) < 0)
 		{
 			ret = rmdir(file);
@@ -193,8 +194,4 @@ int R(char file[20])
 		}
 		return ret ;
 	}
-	
-	/*closedir(dirp);
-	return 0;*/
-	
 }

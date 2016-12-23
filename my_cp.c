@@ -73,11 +73,6 @@ int main(int argc, char *argv[])
 				strcat(dest,argv[i]);
 			}
 			j++;
-			
-			if(j>1)
-			{
-				break;
-			}
 		}
 	}
 	
@@ -141,7 +136,9 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-// validé
+/*
+basic cp command
+*/
 
 bool base(char source_file[20], char dest_file[20])
 {
@@ -163,22 +160,24 @@ bool base(char source_file[20], char dest_file[20])
 	int data;
 	while(1)
    {
-      data = fgetc(source);
+      data = fgetc(source);//reading
       if( feof(source) )
       {
          break ;
       }
-     fputc(data,target);
+     fputc(data,target);//wrinting
    }
 	
 	fclose(source);
 	fclose(target);
-	//printf("base ok \n");
+	
 	
 	return true;
 }
 
-// à valider
+/*
+	-f option
+*/
 bool f(char source_file[20], char dest_file[20])
 {
 	FILE *source , *target;
@@ -190,9 +189,11 @@ bool f(char source_file[20], char dest_file[20])
 		
 		return false;
 	}
-	
+	/*
+		openning the file to check if it exists
+	*/
 	target = fopen(dest_file,"r");
-	if(target == NULL)
+	if(target == NULL)// exists
 	{		
 		target = fopen(dest_file,"w");
 		if(target != NULL)
@@ -205,15 +206,18 @@ bool f(char source_file[20], char dest_file[20])
 		}
 		return result;
 	}
-	else
+	else//doesn't exist
 	{
 		fclose(target);
-		result = base(source_file,dest_file);
+		result = base(source_file,dest_file);//first attempt
 		if(result == false)
 		{
 			int del = 0;
-			//target = fopen(dest_file,"w");
 			
+			/*
+				deleting the file
+				and creating a new one
+			*/
 			del = remove(dest_file);
 			if(del == 0)
 			{
@@ -232,6 +236,10 @@ bool f(char source_file[20], char dest_file[20])
 	
 }
 
+/*
+	this function will prompt a message,
+	asking for the permisson to overwrite a file
+*/
 bool i_opt (char source_file[20], char dest_file[20])
 {
 	FILE *source , *target;
@@ -241,11 +249,6 @@ bool i_opt (char source_file[20], char dest_file[20])
 	{
 		
 		bool result= false ;
-		
-		//printf("target null \n");
-		
-		//result = base(source_file,dest_file);
-		
 		return true;
 		
 	}
@@ -266,10 +269,7 @@ bool i_opt (char source_file[20], char dest_file[20])
 		if(ans[0] == 'y')
 		{		
 			
-			bool result;
-			
-			//result = base(source_file,dest_file);
-			
+			bool result;			
 			return true; 
 						
 		}
@@ -283,7 +283,9 @@ bool i_opt (char source_file[20], char dest_file[20])
 }
 
 
-//validé
+/*
+	i option
+*/
 bool i(char source_file[20], char dest_file[20])
 {
 	

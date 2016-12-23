@@ -173,7 +173,6 @@ Data base(char route[256], char opt[])
 	DIR *dirp = opendir(route);
 	Data info;
 	info.index = 0;
-	//info.set = 0;
 	info.opt[0] = opt[0];
 	
 	int i;

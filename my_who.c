@@ -15,7 +15,6 @@
 void base();
 void b();
 void q();
-void my_uptime();
 
 #define HOUR 3600
 #define MIN 60
@@ -76,8 +75,8 @@ void base()
 	struct tm *y2k;
 	char date[20];
 	
-    setutent();
-    n=getutent();
+    setutent();//preparation of the data
+    n=getutent();//retrive of the data
     while(n!=NULL)
     {
         if(n->ut_type==7)
@@ -98,7 +97,7 @@ void base()
         }
         n=getutent();
     }
-	endutent();
+	endutent();//closing de retrieve session
 }
 
 void q()
@@ -109,7 +108,7 @@ void q()
     setutent();
     n=getutent();
 	int user_cmp = 0;
-	//printf("test\n");
+	
     while(n!=NULL)
     {
         if(n->ut_type==7)
@@ -144,9 +143,7 @@ void b()
 			y2k=localtime(&start_time);
 			strftime(date, 20, "%F %R", y2k);
 			
-			printf("   démarrage du système ");
-
-
+			printf("démarrage du système ");
 			printf("%s\n",date);
         }
         n=getutent();

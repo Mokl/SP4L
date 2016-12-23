@@ -68,9 +68,7 @@ void base()
 	int h =0 ,m =0, s=0,time_s;
 	time_t curr_time;
 	struct tm *y2k;
-	double load[3];
-	//int nb_usr;
-	
+	double load[3];	
 	
 	//current time
 	curr_time = time(NULL);
@@ -121,20 +119,19 @@ void s()
 	struct tm *y2k;
 	char date[20];
 	
-	sysinfo(&info);
+	sysinfo(&info);	
 	
-	
-	curr_time = time(NULL);
-	
-	start_time = curr_time - info.uptime;
-	
-	y2k = localtime(&start_time);
-	
+	curr_time = time(NULL);	
+	start_time = curr_time - info.uptime;	
+	y2k = localtime(&start_time);	
 	strftime(date,20 , "%F %T",y2k);
 	
 	printf("%s \n",date);	
 }
 
+/*
+	this function return the number of logged user
+*/
 int nb_user()
 {
 	struct utmp *n;
