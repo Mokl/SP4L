@@ -4,6 +4,7 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 
 char commande[50];
@@ -99,7 +100,7 @@ int main(int argc, char **argv)
 		if (argc > 1)
 		{
 			//on ouvre un fichier en read only
-			int fichier = open(argv[optind], O_RDONLY); 
+			int fichier = open(argv[optind],O_RDONLY); 
 			char *pos, *string;
 		
 			//On sauvegarde le contenue du fichier
