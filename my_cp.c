@@ -73,6 +73,11 @@ int main(int argc, char *argv[])
 				strcat(dest,argv[i]);
 			}
 			j++;
+			
+			if(j>1)
+			{
+				break;
+			}
 		}
 	}
 	
