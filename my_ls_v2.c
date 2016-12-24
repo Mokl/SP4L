@@ -137,7 +137,7 @@ void display(Data info)
 			
 			for(j = 0 ; j < info.index+1 ; j++)
 			{
-				if(strcmp(info.name[j],"") == 0)
+				if(strcmp(info.name[j],"") != 0)
 				{
 					printf("%s\n", info.name[j]);
 				}
@@ -147,7 +147,7 @@ void display(Data info)
 		{
 			for(j = 0 ; j < info.index+1 ; j++)
 			{
-				if(strcmp(info.name[j],"")==0 && j < info.index)
+				if(strcmp(info.name[j],"")!=0 && j < info.index)
 				{
 					printf(" %s ", info.name[j]);
 				}
