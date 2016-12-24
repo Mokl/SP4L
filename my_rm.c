@@ -10,9 +10,8 @@ int R(char file[]);
 
 int main(int argc, char *argv[])
 {
-	int Rflag=0, rflag =0 ,opterr = 0;
-	char * cvalue = NULL ;
-	int index , c ;
+	int Rflag=0, rflag =0;
+	int c ;
 	char file[20]={0};
 	
 	 struct option options[] = 

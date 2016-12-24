@@ -22,9 +22,8 @@ void q();
 
 int main(int argc, char *argv[])
 {
-	int qflag=0 , bflag=0, opterr = 0;
-	char * cvalue = NULL ;
-	int index , c ;
+	int qflag=0 , bflag=0;
+	int c ;
 	
 	 struct option options[] = 
     {
@@ -69,11 +68,9 @@ int main(int argc, char *argv[])
 void base()
 {
 	struct utmp *n;
-    char a[256];
-    int i;
-	time_t  curr_time, start_time;
 	struct tm *y2k;
 	char date[20];
+	time_t start_time;
 	
     setutent();//preparation of the data
     n=getutent();//retrive of the data
@@ -81,11 +78,12 @@ void base()
     {
         if(n->ut_type==7)
         {
+			
+			
             printf("%-9s",n->ut_user);//user name
             printf("%-12s",n->ut_line);//
 			
 			//computation of the logging date and hour
-			curr_time = time(NULL);
 			start_time =n->ut_tv.tv_sec;
 			y2k=localtime(&start_time);
 			strftime(date, 20, "%F %R", y2k);
@@ -103,8 +101,6 @@ void base()
 void q()
 {
 	struct utmp *n;
-    char a[256];
-    int i;
     setutent();
     n=getutent();
 	int user_cmp = 0;
@@ -127,7 +123,7 @@ void q()
 void b()
 {
 	struct utmp *n;
-	time_t  curr_time ,start_time;
+	time_t start_time;
 	struct tm *y2k;
 	char date[20];
 	
@@ -138,7 +134,6 @@ void b()
         if(n->ut_type==7)
 		{	
 			//computation of the loging date and hour
-			curr_time = time(NULL);
 			start_time =n->ut_tv.tv_sec;
 			y2k=localtime(&start_time);
 			strftime(date, 20, "%F %R", y2k);

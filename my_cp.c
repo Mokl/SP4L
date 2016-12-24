@@ -16,9 +16,8 @@ bool i_opt (char source_file[20], char dest_file[20]);
 
 int main(int argc, char *argv[])
 {
-	int iflag=0 , fflag=0 ,opterr = 0;
-	char * cvalue = NULL ;
-	int index , c ;
+	int iflag=0 , fflag=0;
+	int c ;
 	char source[20]={0}, dest[20] = {0};
 	
 	 struct option options[] = 
@@ -242,15 +241,12 @@ bool f(char source_file[20], char dest_file[20])
 */
 bool i_opt (char source_file[20], char dest_file[20])
 {
-	FILE *source , *target;
+	FILE *target;
 	
 	target = fopen(dest_file,"r");
 	if(target == NULL)
 	{
-		
-		bool result= false ;
-		return true;
-		
+		return true;		
 	}
 	else
 	{
@@ -258,7 +254,6 @@ bool i_opt (char source_file[20], char dest_file[20])
 		fclose(target);
 		printf("Voulez-vous ecraser le fichier existant? \n y/n ");
 		scanf("%s", ans);
-		int state = 0;
 		
 		while((ans[0] != 'y') && (ans[0] != 'n'))
 		{
@@ -267,15 +262,11 @@ bool i_opt (char source_file[20], char dest_file[20])
 		}
 			
 		if(ans[0] == 'y')
-		{		
-			
-			bool result;			
+		{					
 			return true; 
-						
 		}
 		else
 		{
-			fclose(source);
 			return false;
 		}
 		
@@ -317,7 +308,6 @@ bool i(char source_file[20], char dest_file[20])
 		fclose(target);
 		printf("Voulez-vous ecraser le fichier existant? \n y/n ");
 		scanf("%s", ans);
-		int state = 0;
 		
 		while((ans[0] != 'y') && (ans[0] != 'n'))
 		{
@@ -337,7 +327,10 @@ bool i(char source_file[20], char dest_file[20])
 		}
 		else
 		{
-			fclose(source);
+			if(source != NULL)
+			{
+				fclose(source);
+			}			
 			return true;
 		}
 		

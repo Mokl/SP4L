@@ -17,9 +17,8 @@ void p();
 
 int main(int argc, char *argv[])
 {
-	int pflag=0 , sflag=0, opterr = 0;
-	char * cvalue = NULL ;
-	int index , c ;
+	int pflag=0 , sflag=0;
+	int c ;
 	
 	 struct option options[] = 
     {
@@ -114,7 +113,6 @@ void p()
 void s()
 {
 	struct sysinfo info;
-	int h =0 ,m =0, s=0,time_s;
 	time_t curr_time, start_time;
 	struct tm *y2k;
 	char date[20];
@@ -135,8 +133,6 @@ void s()
 int nb_user()
 {
 	struct utmp *n;
-    char a[256];
-    int i;
     setutent();
     n=getutent();
 	int user_cmp = 0;

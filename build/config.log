@@ -1,0 +1,15 @@
+# project  configured on Sat Dec 24 10:07:11 2016 by
+# waf 1.8.8 (abi 98, python 2070cf0 on linux2)
+# using ./waf-1.8.8 configure build
+#
+----------------------------------------
+Setting top to
+/home/moise/Bureau/SP4L
+----------------------------------------
+Setting out to
+/home/moise/Bureau/SP4L/build
+----------------------------------------
+Checking for 'gcc' (C compiler)
+find program=['gcc', 'cc'] paths=['/home/moise/bin', '/home/moise/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='CC' -> ['/usr/bin/gcc']
+find program=['ar'] paths=['/home/moise/bin', '/home/moise/.local/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin', '/usr/games', '/usr/local/games', '/snap/bin'] var='AR' -> ['/usr/bin/ar']
+/usr/bin/gcc

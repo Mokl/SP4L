@@ -25,9 +25,8 @@ Data R(char route[], char opt[]);
 
 int main(int argc, char *argv[])
 {
-	int aflag=0 , lflag=0 , Rflag=0, opterr = 0;
-	char * cvalue = NULL ;
-	int index , c ;
+	int aflag=0 , lflag=0 , Rflag=0;
+	int  c ;
 	char route[256]={0};
 	Data data;
 	
@@ -138,7 +137,7 @@ void display(Data info)
 			
 			for(j = 0 ; j < info.index+1 ; j++)
 			{
-				if(info.name[j] != "" )
+				if(strcmp(info.name[j],"") == 0)
 				{
 					printf("%s\n", info.name[j]);
 				}
@@ -148,7 +147,7 @@ void display(Data info)
 		{
 			for(j = 0 ; j < info.index+1 ; j++)
 			{
-				if(info.name[j] != "" && j < info.index)
+				if(strcmp(info.name[j],"")==0 && j < info.index)
 				{
 					printf(" %s ", info.name[j]);
 				}
@@ -214,7 +213,6 @@ Data a(char route[], char opt[])
 	info.index = 0;
 	info.opt[0] = opt[0];
 	info.set = 0;
-	char data[1000];	
 	
 	int i;
 	for(i = 0; i< 1001;i++)
@@ -248,8 +246,7 @@ Data R(char route[], char opt[])
 	DIR *dirp = opendir(route);
 	Data info;
 	info.index = 0;
-	info.set = 0;
-	char data[1000];	
+	info.set = 0;	
 	info.opt[0] = opt[0];
 
 	while(dirp)
@@ -263,9 +260,7 @@ Data R(char route[], char opt[])
 				info.index++;
 				if(dp->d_type == DT_DIR)
 				{
-					Data info_subdir= {.index=0, .set=0 ,.opt={0} };
-					int i;
-					
+					Data info_subdir= {.index=0, .set=0 ,.opt={0} };					
 					
 					char route_subdir[260]={0};
 					
@@ -306,8 +301,6 @@ Data R(char route[], char opt[])
 					if(dp->d_type == DT_DIR)
 					{
 						Data info_subdir= {.index=0, .set=0 ,.opt={0} };
-						int i;
-
 
 						char route_subdir[260]={0};
 
